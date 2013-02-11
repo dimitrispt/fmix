@@ -1,0 +1,25 @@
+#instructResize {
+    position: absolute;
+    top:450px;
+    left:400px;
+    z-index: 10;
+    border-radius: 15px;
+    display: none; 
+}
+
+#instructResize2 {
+    position: absolute;
+    top:795px;
+    left:400px;
+    z-index: 10;
+    border-radius: 15px;
+    display: none; 
+}
+
+#instructResize2 img {
+transform:rotate(-90deg);
+-ms-transform:rotate(-90deg); /* IE 9 */
+-moz-transform:rotate(-90deg); /* Firefox */
+-webkit-transform:rotate(-90deg); /* Safari and Chrome */
+-o-transform:rotate(-90deg); /* Opera */
+}
