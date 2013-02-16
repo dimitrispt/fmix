@@ -1,12 +1,8 @@
-
 .app-area {
     position: relative;
-    background-color: #333;
     height: 854px;
-    width: 800px;
+    width: 740px;
     z-index: 0;
-    border-radius: 15px;
-    box-shadow: 7px 7px 12px #888;
 
 }
 
@@ -30,17 +26,19 @@ background: linear-gradient(to right,  rgba(165,165,165,1) 10%,rgba(206,206,206,
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a5a5a5', endColorstr='#cecece',GradientType=1 ); /* IE6-9 */
 
     width: 80px;
-    height: 420px;
-    padding: 3px;
-    border: black solid thin;
+    height: 415px;
+    padding: 10px 5px 0px 5px;
+    text-align: center;
+    box-shadow: 2px 2px 5px #888;
     border-right-width: 3px;
+    
     z-index: 8;
  
 }
 
 #img1-ctrl {
     border-top-left-radius: 15px;
-    
+    border-bottom: rgba(210,210,210,.5) solid 1px;
     
 }
 #img2-ctrl {
@@ -90,11 +88,6 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
    
 }
 
-.msgLoad {
-    background-color: #9cf;
-    padding-left:20%;
-    display: none;
-}
 
 .results {
     width: 420px;
@@ -137,10 +130,6 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
 .crop-image {
      position: relative;
 
-}
-
-.clear{
-    clear: both;
 }
 
 .ctrlBtn {
@@ -207,4 +196,98 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
   -webkit-animation: .85s ajax-loader-rotate steps(8) infinite;
   -moz-animation: .85s ajax-loader-rotate steps(8) infinite;
   animation: .85s ajax-loader-rotate steps(8) infinite;
+}
+
+#grab, #grab2 {
+    font-size: 20px;
+    color: #2779aa;
+}
+
+
+/*************************************************************/
+/***************MIX AREA***********/
+
+
+div #mix-area {
+  text-shadow: -3px 2px 4px #999;
+  font-family: 'Vast Shadow', cursive;
+  position: absolute;
+  padding: 5px;
+  left: 80px;
+  top: 0px;
+  
+    background-color: #eaeaea;
+    /*
+background: rgb(101,101,101);  Old browsers 
+background: -moz-linear-gradient(left,  rgba(101,101,101,1) 0%, rgba(180,180,180,1) 61%, rgba(242,242,242,1) 100%);  FF3.6+ 
+background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(101,101,101,1)), color-stop(61%,rgba(180,180,180,1)), color-stop(100%,rgba(242,242,242,1)));  Chrome,Safari4+ 
+background: -webkit-linear-gradient(left,  rgba(101,101,101,1) 0%,rgba(180,180,180,1) 61%,rgba(242,242,242,1) 100%);  Chrome10+,Safari5.1+ 
+background: -o-linear-gradient(left,  rgba(101,101,101,1) 0%,rgba(180,180,180,1) 61%,rgba(242,242,242,1) 100%);  Opera 11.10+ 
+background: -ms-linear-gradient(left,  rgba(101,101,101,1) 0%,rgba(180,180,180,1) 61%,rgba(242,242,242,1) 100%);  IE10+ 
+background: linear-gradient(to right,  rgba(101,101,101,1) 0%,rgba(180,180,180,1) 61%,rgba(242,242,242,1) 100%);  W3C 
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#656565', endColorstr='#f2f2f2',GradientType=1 );  IE6-9 */
+
+    height: 840px;
+    width: 640px;
+    overflow: auto;
+    z-index: -1;
+    text-align: center;
+   
+    border: 0px solid;
+    /*border-radius: 15px;*/
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
+    box-shadow: 2px 2px 3px #888;
+
+ }
+
+
+.img-div {
+    display:  inline-block;
+    position: absolute;
+  
+ }
+
+
+#mix-image1 {
+   position: absolute;
+   width:  300px;
+   height: 350px;
+   top: 10px;
+   left: 10px;
+     
+}
+
+#mix-image2 {
+   position: absolute;
+   width:  300px;
+   height: 350px;
+   top: 400px;
+   left: 10px;
+}
+
+#instructResize {
+    position: absolute;
+    top:450px;
+    left:400px;
+    z-index: 10;
+    border-radius: 15px;
+    display: none; 
+}
+
+#instructResize2 {
+    position: absolute;
+    top:795px;
+    left:400px;
+    z-index: 10;
+    border-radius: 15px;
+    display: none; 
+}
+
+#instructResize2 img {
+transform:rotate(-90deg);
+-ms-transform:rotate(-90deg); /* IE 9 */
+-moz-transform:rotate(-90deg); /* Firefox */
+-webkit-transform:rotate(-90deg); /* Safari and Chrome */
+-o-transform:rotate(-90deg); /* Opera */
 }

@@ -10,9 +10,8 @@
         <link rel="stylesheet" href="Jcrop/css/jquery.Jcrop.css" type="text/css" />
 
         <link href="styles/fashionmix.css" rel="stylesheet" type="text/css">
-         <link href="styles/mixarea.css" rel="stylesheet" type="text/css">
-          <link href="styles/instruct.css" rel="stylesheet" type="text/css">
-
+        
+        <link href='http://fonts.googleapis.com/css?family=Vast+Shadow' rel='stylesheet' type='text/css'>
          
     </head>
     
@@ -22,9 +21,9 @@
             
         </div>
         <div id="instructResize">
-        <img src="http://www.tabforacause.org/images/xupLeftArrow.png.pagespeed.ic.7Na_aJQ0xI.png" width="40"
+        <img src="styles/leftArrow.png" width="40"
              height="45"/>
-        <span style="position: relative; left: -10px;
+        <span style="position: relative; left: 0px;
               box-shadow: -2px 1px 3px #777;background-color: #9cf;
               font-family:sans-serif; font-size: 16px;">
             Grab this corner to resize the picture</span>
@@ -32,9 +31,9 @@
         
         <div id="instructResize2">
         
-        <img src="http://www.tabforacause.org/images/xupLeftArrow.png.pagespeed.ic.7Na_aJQ0xI.png" width="40"
+        <img src="styles/leftArrow.png" width="40"
              height="45"/>
-        <span style="position: relative; left: -10px; top: -30px;
+        <span style="position: relative; left: 4px; top: -37px;
               box-shadow: -2px 1px 3px #777;background-color: #9cf;
               font-family:sans-serif; font-size: 16px;">
             Grab this corner to resize the picture</span><br/>
@@ -52,7 +51,8 @@
                     <button class="ctrlBtn" id="cropme" disabled>Crop Image</button><br/>
                     </div>
                     <br/>
-                    <div class="ctrlOpacity" style="padding-left: 0px;padding-right: 15px;">
+                    
+                    <div class="ctrlOpacity" style="padding-left: 0px;padding-right: 15px; ">
                           Opacity:<br/> 
                           <div id="slider1"></div>
                           <span id="opacity_value1">100%</span>
@@ -63,15 +63,20 @@
                 
                 <div class="img-selector" id="img1-selector">
                     <div style="text-align: right;margin-top:-15px;margin-right:-10px;">
-                    <a href="#" class="close1">close</a></div>
+                    <a href="#" class="close1">close</a>
+                    </div>
                     <form name="img-select-form">
-                        Enter an Image Link:<input id="enter_url" type="text" size="50" /><br/>
-                        <div style="text-align:center;"> and press <button id="grab" name="grab">Load</button>
+                        Enter an Image URL:
+                        <input id="enter_url" type="text" size="50" /><br/>
+                        <div style="text-align:center;margin-top:5px;"> and press <a href="#" id="grab" name="grab">Load</a>
                         </div>
+                        
+                        <div style="text-align:left; padding-top:12px;">
                           <span style="font-size:11px;">Currently supporting .jpg, .jpeg &amp; .gif images</span>
+                        </div>
                     </form> 
                     
-                         <div class="ajax-loader"></div>
+                         <div class="ajax-loader" id="ajax-loader"></div>
                       
                     <div class="results"></div>
                   
@@ -111,15 +116,16 @@
                         <a href="#" class="close1">close</a></div>
                     
                     <form name="img-select-form">
-                           Enter an Image Link:<input id="enter_url2" type="text" size="45" /><br/>
-                           <div style="text-align:center;"> and press<button id="grab2" name="grab">Load</button>
+                           Enter an Image URL:<input id="enter_url2" type="text" size="45" /><br/>
+                           <div style="text-align:center;"> and press <a href="#" id="grab2" name="grab">Load</a>
                            </div>
                            
-                            <span style="font-size:10px;">
-                                Currently supporting .jpg, .jpeg &amp; .gif images</span>
+                          <div style="text-align:left;padding-top:12px">
+                          <span style="font-size:11px;">Currently supporting .jpg, .jpeg &amp; .gif images</span>
+                        </div>   
                     </form> 
                        <div class="ajax-loader" id="ajax-loader2"></div>
-              
+            
                      <div class="results">
                          
                   
@@ -156,7 +162,7 @@
                      src=""/>
                 </div>
             </div>
-            <button id="btnExit">Exit</button>
+            
         </div>
         
             

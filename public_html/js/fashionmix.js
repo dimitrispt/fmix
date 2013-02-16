@@ -172,9 +172,8 @@ $(".btnCrop").click(function(){
             data: {xi1:x1, yi1: y1, wi1:w1, hi1:h1, index: 1},
             dataType: "text"
           }).done (function(data) {
-                            
-                      alert(y1);
-                      $('#mix-image1').attr('src', "srvscripts/"+data);
+                   
+                      $('#mix-image1').attr('src', "srvscripts/"+data+"?"+d.getTime());
                           }
              ) ;
      
@@ -188,9 +187,7 @@ $(".btnCrop2").click(function(){
             data: {xi1:x1, yi1: y1, wi1:w1, hi1:h1, index: 2},
             dataType: "text"
           }).done (function(data) {
-                            
-                      alert(y1);
-                      $('#mix-image2').attr('src', "srvscripts/"+data);
+                      $('#mix-image2').attr('src', "srvscripts/"+data+"?"+d.getTime());
                           }
              ) ;
      
@@ -199,7 +196,7 @@ $(".btnCrop2").click(function(){
  
  $("#grab").click(function() {
      var img_url = $("#enter_url").attr('value');
-     $(".ajax-loader").show();
+     $("#ajax-loader").show();
      $.ajax({
              url: "srvscripts/get_images.php",
             data: {url:img_url, index: 1},
@@ -207,8 +204,16 @@ $(".btnCrop2").click(function(){
             dataType: "text"
             
           }).done (function(data) {
-                        image1 = data;
-                       $(".ajax-loader").hide(); 
+                   var j = jQuery.parseJSON(data);
+                                    
+                   if (j.error !== 0) {
+                            $("#ajax-loader").hide();
+                            alert(j.msg);
+                       }
+                           
+                   if (j.error === 0) {
+                       image1 = j.filename;
+                       $("#ajax-loader").hide(); 
                        $('#mix-image1').attr('src', "srvscripts/"+image1);
                        $("#msgLoad1").hide(100);
                        $("#img1-selector").fadeOut(200);
@@ -216,11 +221,12 @@ $(".btnCrop2").click(function(){
                        $( "#slider1" ).slider("option", "disabled", false);
                        showInstructResize(1);
                    }
-             ) ;
+            }) ;
    
     });
 
-$("#grab2").click(function() {
+$("#grab2").click(function(event) {
+    event.preventDefault();
      var img_url = $("#enter_url2").attr('value');
      $("#ajax-loader2").show();
      $.ajax({
@@ -230,7 +236,15 @@ $("#grab2").click(function() {
             dataType: "text"
             
           }).done (function(data) {
-                        image2 = data;
+                var j2 = jQuery.parseJSON(data);
+                       
+                if (j2.error !== 0) {
+                       $("#ajax-loader2").hide();
+                       alert(j2.msg);
+                }
+                       
+                if (j2.error === 0) {
+                       image2 = j2.filename;
                        $("#ajax-loader2").hide();
                        $('#mix-image2').attr('src', "srvscripts/"+image2);
                        $("#msgLoad2").hide(100);
@@ -238,10 +252,15 @@ $("#grab2").click(function() {
                        $("#cropme2").removeAttr('disabled');
                        $( "#slider2" ).slider("option", "disabled", false);
                        showInstructResize(2);
-                             }
-             ) ;
+                 }
+            
+            }) ;
    
     });
+
+$.ajax({
+             url: "srvscripts/scheduled_cleanup.php"
+          });
 
 /*
 $("#btnExit").click(function() {
@@ -255,7 +274,7 @@ $("#btnExit").click(function() {
     
 });
 
-/*
+
 window.onbeforeunload = function(e) {
     alert("on-beforeunload"); 
     $.ajax({
@@ -265,26 +284,7 @@ window.onbeforeunload = function(e) {
                    alert("OK!");
           });
 };
-
-window.onunload = function(e) {
-     alert("on-unload event"); 
-    $.ajax({
-             url: "srvscripts/cleanup.php"
-                        
-          }).done(function() {
-                    alert("OK!");
-          });
-};
-
-$(window).unload(function() {
-     $.ajax({
-             url: "srvscripts/cleanup.php"
-                        
-          }).done(function() {
-                    alert("OK!");
-          });
-});
 */
- 
+
 });
 

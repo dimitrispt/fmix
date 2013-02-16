@@ -3,6 +3,9 @@ require_once 'functions.inc.php';
 
 session_start();
 
+if (!(  is_numeric($_GET['xi1']) && is_numeric($_GET['yi1']) 
+        && is_numeric($_GET['wi1']) && is_numeric($_GET['hi1']) ) ){exit;}
+
 if  (   !( isset($_GET['index']) )   )  {exit;}
 if ( $_GET['index'] !=1  &&  $_GET['index'] !=2 ) {exit;}
 $index = $_GET['index'];
@@ -16,7 +19,6 @@ $filename = "{$img_folder}/image{$index}.jpg";
 list($current_width, $current_height) = getimagesize($filename);
 $w_coef = $current_width / 250;
 $h_coef = $current_height / 250;
-
 
 $x1  = $_GET['xi1'] * $w_coef;
 $y1  = $_GET['yi1']  * $h_coef;

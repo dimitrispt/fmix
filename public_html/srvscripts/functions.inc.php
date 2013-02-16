@@ -1,4 +1,9 @@
 <?php
+function jresponse($filename, $msg="", $error=0) {
+    $response = array("filename"=>$filename, "msg"=>$msg, "error"=>$error);
+     return json_encode($response);
+}
+
 
 function gif2jpeg($p_fl, $p_new_fl='', $bgcolor=false){
   list($wd, $ht, $tp, $at)=getimagesize($p_fl);
