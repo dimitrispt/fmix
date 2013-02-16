@@ -1,7 +1,7 @@
 .app-area {
     position: relative;
-    height: 854px;
-    width: 740px;
+    height: 700px;
+    width: 650px;
     z-index: 0;
 
 }
@@ -26,7 +26,7 @@ background: linear-gradient(to right,  rgba(165,165,165,1) 10%,rgba(206,206,206,
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a5a5a5', endColorstr='#cecece',GradientType=1 ); /* IE6-9 */
 
     width: 80px;
-    height: 415px;
+    height: 335px;
     padding: 10px 5px 0px 5px;
     text-align: center;
     box-shadow: 2px 2px 5px #888;
@@ -227,8 +227,8 @@ background: -ms-linear-gradient(left,  rgba(101,101,101,1) 0%,rgba(180,180,180,1
 background: linear-gradient(to right,  rgba(101,101,101,1) 0%,rgba(180,180,180,1) 61%,rgba(242,242,242,1) 100%);  W3C 
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#656565', endColorstr='#f2f2f2',GradientType=1 );  IE6-9 */
 
-    height: 840px;
-    width: 640px;
+    height: 680px;
+    width: 550px;
     overflow: auto;
     z-index: -1;
     text-align: center;
@@ -251,19 +251,20 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#656565', end
 
 #mix-image1 {
    position: absolute;
-   width:  300px;
-   height: 350px;
-   top: 10px;
+   width:  200px;
+   height: 250px;
+   top: -20px;
    left: 10px;
      
 }
 
 #mix-image2 {
    position: absolute;
-   width:  300px;
-   height: 350px;
-   top: 400px;
+   width:  200px;
+   height: 250px;
+   top: 280px;
    left: 10px;
+   
 }
 
 #instructResize {
