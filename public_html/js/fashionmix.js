@@ -1,6 +1,9 @@
-(function(c,q){var m="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==";c.fn.imagesLoaded=function(f){function n(){var b=c(j),a=c(h);d&&(h.length?d.reject(e,b,a):d.resolve(e));c.isFunction(f)&&f.call(g,e,b,a)}function p(b){k(b.target,"error"===b.type)}function k(b,a){b.src===m||-1!==c.inArray(b,l)||(l.push(b),a?h.push(b):j.push(b),c.data(b,"imagesLoaded",{isBroken:a,src:b.src}),r&&d.notifyWith(c(b),[a,e,c(j),c(h)]),e.length===l.length&&(setTimeout(n),e.unbind(".imagesLoaded",
-p)))}var g=this,d=c.isFunction(c.Deferred)?c.Deferred():0,r=c.isFunction(d.notify),e=g.find("img").add(g.filter("img")),l=[],j=[],h=[];c.isPlainObject(f)&&c.each(f,function(b,a){if("callback"===b)f=a;else if(d)d[b](a)});e.length?e.bind("load.imagesLoaded error.imagesLoaded",p).each(function(b,a){var d=a.src,e=c.data(a,"imagesLoaded");if(e&&e.src===d)k(a,e.isBroken);else if(a.complete&&a.naturalWidth!==q)k(a,0===a.naturalWidth||0===a.naturalHeight);else if(a.readyState||a.complete)a.src=m,a.src=d}):
-n();return d?d.promise(g):g}})(jQuery);
+/*! waitForImages jQuery Plugin - v1.4.2 - 2013-01-19
+* https://github.com/alexanderdickson/waitForImages
+* Copyright (c) 2013 Alex Dickson; Licensed MIT */
+(function(e){var t="waitForImages";e.waitForImages={hasImageProperties:["backgroundImage","listStyleImage","borderImage","borderCornerImage"]},e.expr[":"].uncached=function(t){if(!e(t).is('img[src!=""]'))return!1;var n=new Image;return n.src=t.src,!n.complete},e.fn.waitForImages=function(n,r,i){var s=0,o=0;e.isPlainObject(arguments[0])&&(i=arguments[0].waitForAll,r=arguments[0].each,n=arguments[0].finished),n=n||e.noop,r=r||e.noop,i=!!i;if(!e.isFunction(n)||!e.isFunction(r))throw new TypeError("An invalid callback was supplied.");return this.each(function(){var u=e(this),a=[],f=e.waitForImages.hasImageProperties||[],l=/url\(\s*(['"]?)(.*?)\1\s*\)/g;i?u.find("*").andSelf().each(function(){var t=e(this);t.is("img:uncached")&&a.push({src:t.attr("src"),element:t[0]}),e.each(f,function(e,n){var r=t.css(n),i;if(!r)return!0;while(i=l.exec(r))a.push({src:i[2],element:t[0]})})}):u.find("img:uncached").each(function(){a.push({src:this.src,element:this})}),s=a.length,o=0,s===0&&n.call(u[0]),e.each(a,function(i,a){var f=new Image;e(f).bind("load."+t+" error."+t,function(e){o++,r.call(a.element,o,s,e.type=="load");if(o==s)return n.call(u[0]),!1}),f.src=a.src})})}})(jQuery);
+
+
 
 var x1, y1, h1, w1;
 var jcrop_api, jcrop_api2;
@@ -178,7 +181,7 @@ $(".btnCrop").click(function(){
           }).done (function(data) {
                    
                     $('#mix-image1').attr('src', "srvscripts/"+data+"?"+d.getTime());
-                    $("#mix-image1").imagesLoaded(function() {
+                    $("#mix-image1").parent().waitForImages(function() {
                         $(".btnCrop").text("Crop"); 
                     });
                  }
@@ -197,7 +200,7 @@ $(".btnCrop2").click(function(){
             dataType: "text"
           }).done (function(data) {
                       $('#mix-image2').attr('src', "srvscripts/"+data+"?"+d.getTime());
-                      $("#mix-image2").imagesLoaded(function() {
+                      $("#mix-image2").parent().waitForImages(function() {
                            $(".btnCrop2").text("Crop"); 
                        }); 
                     }
@@ -226,10 +229,11 @@ $(".btnCrop2").click(function(){
                            
                    if (j.error === 0) {
                        image1 = j.filename;
-                       $("#ajax-loader").hide(); 
+                       
                        $('#mix-image1').attr('src', "srvscripts/"+image1);
                        $("#msgLoad1").hide(100);
-                  $("#mix-image1").imagesLoaded(function() {
+                  $("#mix-image1").parent().waitForImages(function() {
+                       $("#ajax-loader").hide(); 
                        $("#img1-selector").fadeOut(200);
                        $("#grab").text("Load");
                        $("#cropme").removeAttr('disabled');
@@ -263,10 +267,11 @@ $("#grab2").click(function(event) {
                        
                 if (j2.error === 0) {
                        image2 = j2.filename;
-                       $("#ajax-loader2").hide();
+                     
                        $('#mix-image2').attr('src', "srvscripts/"+image2);
                        $("#msgLoad2").hide(100);
-                   $("#mix-image2").imagesLoaded(function() {
+                   $("#mix-image2").parent().waitForImages(function() {
+                       $("#ajax-loader2").hide();
                        $("#img2-selector").fadeOut(200);
                        $("#grab2").text("Load");
                        $("#cropme2").removeAttr('disabled');

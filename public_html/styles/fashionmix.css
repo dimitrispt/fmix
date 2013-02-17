@@ -285,10 +285,10 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#656565', end
     display: none; 
 }
 
-#instructResize2 img {
+/*#instructResize2 img {
 transform:rotate(-90deg);
 -ms-transform:rotate(-90deg); /* IE 9 */
--moz-transform:rotate(-90deg); /* Firefox */
--webkit-transform:rotate(-90deg); /* Safari and Chrome */
--o-transform:rotate(-90deg); /* Opera */
-}
+/*-moz-transform:rotate(-90deg); /* Firefox */
+/*-webkit-transform:rotate(-90deg); /* Safari and Chrome */
+/*-o-transform:rotate(-90deg); /* Opera */
+/*}*/
