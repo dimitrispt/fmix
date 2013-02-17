@@ -251,17 +251,17 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#656565', end
 
 #mix-image1 {
    position: absolute;
-   width:  200px;
-   height: 250px;
-   top: -20px;
+   width:  250px;
+   height: 300px;
+   top: -25px;
    left: 10px;
      
 }
 
 #mix-image2 {
    position: absolute;
-   width:  200px;
-   height: 250px;
+   width:  250px;
+   height: 300px;
    top: 280px;
    left: 10px;
    
