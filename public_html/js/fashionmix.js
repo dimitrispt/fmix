@@ -10,6 +10,7 @@ var jcrop_api, jcrop_api2;
 d = new Date();
 var image1, image2;
 
+$.ajaxSetup({ cache: false });
 
 function showInstructResize(img) {
     var position, width, height, instructTop, instructLeft;
@@ -80,7 +81,11 @@ $(document).ready(function(){
 
     $("#cropme").click(function(){
 //        jcrop_api.destroy();
+        $(".btnCrop").text("please wait..."); 
         $('#crop-image1').attr('src', "srvscripts/"+image1+"?"+d.getTime());
+        $("#crop-image1").parent().waitForImages(function() {
+            $(".btnCrop").text("Crop");    
+        });
         $("#crop-image1").css("width","250px;");
         $("#img1-cropper").css("height","250px;");
         $("#img1-cropper").show("500");
@@ -94,7 +99,11 @@ $(document).ready(function(){
      });
  
      $("#cropme2").click(function(){
+        $(".btnCrop2").text("please wait..."); 
         $('#crop-image2').attr('src', "srvscripts/"+image2+"?"+d.getTime());
+        $("#crop-image2").parent().waitForImages(function() {
+            $(".btnCrop2").text("Crop");    
+        });
         $("#img2-cropper").css("width","250px;");
         $("#img2-cropper").css("height","250px;");
         $("#img2-cropper").show("500");
@@ -174,13 +183,15 @@ $(function() {
 
 $(".btnCrop").click(function(){
     $(".btnCrop").text("please wait..");
+   
     $.ajax({
-             url: "srvscripts/crop.php",
+            url: "srvscripts/crop.php",
+            
             data: {xi1:x1, yi1: y1, wi1:w1, hi1:h1, index: 1},
             dataType: "text"
           }).done (function(data) {
-                   
-                    $('#mix-image1').attr('src', "srvscripts/"+data+"?"+d.getTime());
+                  
+                    $('#mix-image1').attr('src', "srvscripts/"+data+"?d="+d.getTime());
                     $("#mix-image1").parent().waitForImages(function() {
                         $(".btnCrop").text("Crop"); 
                     });
@@ -224,13 +235,14 @@ $(".btnCrop2").click(function(){
                                     
                    if (j.error !== 0) {
                             $("#ajax-loader").hide();
+                            $("#grab").text("Load");
                             alert(j.msg);
                        }
                            
                    if (j.error === 0) {
                        image1 = j.filename;
                        
-                       $('#mix-image1').attr('src', "srvscripts/"+image1);
+                       $('#mix-image1').attr('src', "srvscripts/"+image1+"?"+d.getTime());
                        $("#msgLoad1").hide(100);
                   $("#mix-image1").parent().waitForImages(function() {
                        $("#ajax-loader").hide(); 
@@ -262,13 +274,14 @@ $("#grab2").click(function(event) {
                        
                 if (j2.error !== 0) {
                        $("#ajax-loader2").hide();
+                        $("#grab2").text("Load");
                        alert(j2.msg);
                 }
                        
                 if (j2.error === 0) {
                        image2 = j2.filename;
                      
-                       $('#mix-image2').attr('src', "srvscripts/"+image2);
+                       $('#mix-image2').attr('src', "srvscripts/"+image2+"?"+d.getTime());
                        $("#msgLoad2").hide(100);
                    $("#mix-image2").parent().waitForImages(function() {
                        $("#ajax-loader2").hide();

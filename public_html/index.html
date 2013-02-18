@@ -47,8 +47,8 @@
                 <div class="controls" id="img1-ctrl">
                     <div style="float:left;">
                     <b>Image 1 Controls</b><br/>
-                    <button class="ctrlBtn" id="pressme">Load Image</button><br/>
-                    <button class="ctrlBtn" id="cropme" disabled>Crop Image</button><br/>
+                    <button class="ctrlBtn" id="pressme">Load</button><br/>
+                    <button class="ctrlBtn" id="cropme" disabled>Crop</button><br/>
                     </div>
                     <br/>
                     
@@ -65,19 +65,21 @@
                     <div style="text-align: right;margin-top:-15px;margin-right:-10px;">
                     <a href="#" class="close1">close</a>
                     </div>
-                    <form name="img-select-form">
+                   
                         Enter an Image URL:
                         <input id="enter_url" type="text" size="50" /><br/>
-                        <div style="text-align:center;margin-top:5px;"> and press <a href="#" id="grab" name="grab">Load</a>
+                        <div style="text-align:center;margin-top:5px;"> and press 
+                            <button class="ctrlBtn" id="grab" name="grab">Load</button>
                         </div>
                         
                         <div style="text-align:left; padding-top:12px;">
                           <span style="font-size:11px;">Currently supporting .jpg, .jpeg &amp; .gif images</span>
                         </div>
-                    </form> 
                     
-                         <div class="ajax-loader" id="ajax-loader"></div>
-                      
+                         <div class="ajax-loader" id="ajax-loader">
+                             <img src="styles/ajax-loader.gif">
+                         </div>
+                        
                     <div class="results"></div>
                   
                 </div>
@@ -101,8 +103,8 @@
                     <!-- ************IMAGE 2 CONTROLS****************-->
              <div class="controls" id="img2-ctrl">
                  <div style="float:left;"> <b>Image 2 Controls</b><br/>
-                <button class="ctrlBtn" id="pressme2">Load Image</button><br/>
-                <button class="ctrlBtn" id="cropme2" disabled>Crop Image</button><br/>
+                <button class="ctrlBtn" id="pressme2">Load</button><br/>
+                <button class="ctrlBtn" id="cropme2" disabled>Crop</button><br/>
              </div> 
                  <br/>
                 <div style="padding-left: 0px;padding-right: 15px;">
@@ -116,16 +118,19 @@
                     <div style="text-align: right;margin-top:-15px;margin-right:-10px;">
                         <a href="#" class="close1">close</a></div>
                     
-                    <form name="img-select-form">
+                   
                            Enter an Image URL:<input id="enter_url2" type="text" size="45" /><br/>
-                           <div style="text-align:center;"> and press <a href="#" id="grab2" name="grab">Load</a>
+                           <div style="text-align:center;"> and press 
+                                <button class="ctrlBtn" id="grab2" name="grab">Load</button>
                            </div>
                            
                           <div style="text-align:left;padding-top:12px">
                           <span style="font-size:11px;">Currently supporting .jpg, .jpeg &amp; .gif images</span>
                         </div>   
-                    </form> 
-                       <div class="ajax-loader" id="ajax-loader2"></div>
+              
+                       <div class="ajax-loader" id="ajax-loader2">
+                           <img src="styles/ajax-loader.gif">
+                       </div>
             
                      <div class="results">
                          
@@ -169,7 +174,7 @@
             
        <script src="Jcrop/js/jquery.min.js"></script>
        <script type="text/javascript" src="js/libs/jquery-1.8.0/jquery.js"></script>
-       <script type="text/javascript" src="js/libs/jqueryui-1.8.23/jquery-ui.js"></script>
+       <script type="text/javascript" src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
        
      
         <script src="Jcrop/js/jquery.Jcrop.min.js"></script>

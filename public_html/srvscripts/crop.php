@@ -32,9 +32,10 @@ $dimensions = array("width"=>$w1, "height"=>$h1, "top"=>$y1, "left"=>$x1);
 
 
 //new cropped image name
-$cropd = $img_folder .  '/image' . $index . '_crop.jpg'; 
+$cropd = $img_folder .  '/image' . $index . '_crop'. time() .'.jpg'; 
 
-
+$mask = $img_folder .  '/image' . $index . '_crop*.jpg';
+@array_map( "unlink", glob($mask) );
 crop_image($filename, $cropd, $dimensions);
 
 echo $cropd;
