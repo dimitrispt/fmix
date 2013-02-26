@@ -61,7 +61,7 @@
              
                   
                 
-                <div class="img-selector" id="img1-selector">
+                <div class="img-selector pops" id="img1-selector">
                     <div style="text-align: right;margin-top:-15px;margin-right:-10px;">
                     <a href="#" class="close1">close</a>
                     </div>
@@ -84,7 +84,7 @@
                   
                 </div>
                 
-                <div class="img-cropper" id="img1-cropper">
+                <div class="img-cropper pops" id="img1-cropper">
                     <div style="text-align: right;margin-top:-15px;margin-right:-10px;">
                     <a href="#" class="crop-close1">Close</a></div>
                     <img class="crop-image" id="crop-image1" style="width:250px; height:250px;"
@@ -114,7 +114,7 @@
                 
                     </div>
              
-                <div class="img-selector" id="img2-selector"> 
+                <div class="img-selector pops" id="img2-selector"> 
                     <div style="text-align: right;margin-top:-15px;margin-right:-10px;">
                         <a href="#" class="close1">close</a></div>
                     
@@ -138,7 +138,7 @@
                     </div>
                     
                 </div>
-                                <div class="img-cropper" id="img2-cropper">
+                                <div class="img-cropper pops" id="img2-cropper">
                                     <div style="text-align: right;margin-top:-15px;margin-right:-10px;">
                                     <a href="#" class="crop-close2">Close</a></div>
                     
@@ -148,10 +148,50 @@
                     <button class="btnCrop2">Crop</button>
                     
                 </div>
+                   <div class="acontrols" id="account-ctrl">
+                        <button class="actrlBtn" id="mymixes" name="mymixes">My Images</button>
+                        <button class="actrlBtn" id="save" name="save">Save Mix</button>
+                    </div>
              </div>
-            </div>
+                  
+             <div class="pops" id="preview">
+             <div style="text-align: right;margin-top:-5px;margin-right:-20px;">
+                            <a href="#" class="prev-close">Close</a></div>
+                 <div id="bkg-choose">
+                     
+                     Choose your background:<br/>
+                     
+                     <a href="#"> 
+                         <img class="bkg-prev" src="srvscripts/images/bkg.jpeg" width="50" height="70">
+                     </a>
+                     <a href="#"> 
+                         <img class="bkg-prev" src="srvscripts/images/bkg.jpeg" width="50" height="70">
+                     </a>
+                     
+                     
+                 </div>
+                 <div id="img-prev-div">
+                <span id="previewHeader">Preview</span>
+                <br />
+                <img id="img-prev" src="" width ="310" height="400">
+                <br/>
+                Add a caption: <input id="caption" type="text" name="caption"/>
+                 </div>
+                <br/>
+                <button onclick="myfun();" 
+                        class="ctrlBtn" id="savedisk" name="savedisk" >Save on disk</button>
+                <button class="ctrlBtn" id="savemixes" name="savemixes" disabled>Save on My Mixes</button>
+             </div>
+                    
+                    
+         </div>
       
-            
+            <script type="text/javascript">
+                function myfun() {
+                  var capt = document.getElementById("caption").value;
+                  location.href='srvscripts/save_as.php?capt='+capt;
+               }
+                 </script>
   <!-- ########################################################################################### -->          
             
  <!-- ############***********************MIX __ AREA***************************** ###############-->

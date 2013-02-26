@@ -1,19 +1,23 @@
+var x1, y1, h1, w1;
+var jcrop_api, jcrop_api2;
+d = new Date();
+var image1, image2;
+
+var images_folder = "srvscripts/"; //location of images folder
+
 /*! waitForImages jQuery Plugin - v1.4.2 - 2013-01-19
 * https://github.com/alexanderdickson/waitForImages
 * Copyright (c) 2013 Alex Dickson; Licensed MIT */
 (function(e){var t="waitForImages";e.waitForImages={hasImageProperties:["backgroundImage","listStyleImage","borderImage","borderCornerImage"]},e.expr[":"].uncached=function(t){if(!e(t).is('img[src!=""]'))return!1;var n=new Image;return n.src=t.src,!n.complete},e.fn.waitForImages=function(n,r,i){var s=0,o=0;e.isPlainObject(arguments[0])&&(i=arguments[0].waitForAll,r=arguments[0].each,n=arguments[0].finished),n=n||e.noop,r=r||e.noop,i=!!i;if(!e.isFunction(n)||!e.isFunction(r))throw new TypeError("An invalid callback was supplied.");return this.each(function(){var u=e(this),a=[],f=e.waitForImages.hasImageProperties||[],l=/url\(\s*(['"]?)(.*?)\1\s*\)/g;i?u.find("*").andSelf().each(function(){var t=e(this);t.is("img:uncached")&&a.push({src:t.attr("src"),element:t[0]}),e.each(f,function(e,n){var r=t.css(n),i;if(!r)return!0;while(i=l.exec(r))a.push({src:i[2],element:t[0]})})}):u.find("img:uncached").each(function(){a.push({src:this.src,element:this})}),s=a.length,o=0,s===0&&n.call(u[0]),e.each(a,function(i,a){var f=new Image;e(f).bind("load."+t+" error."+t,function(e){o++,r.call(a.element,o,s,e.type=="load");if(o==s)return n.call(u[0]),!1}),f.src=a.src})})}})(jQuery);
 
 
-
-var x1, y1, h1, w1;
-var jcrop_api, jcrop_api2;
-d = new Date();
-var image1, image2;
-
 $.ajaxSetup({ cache: false });
+
 
 function showInstructResize(img) {
     var position, width, height, instructTop, instructLeft;
+    
+
     
     if (img==1) {
         offset = $("#mix-image1").offset();
@@ -72,17 +76,23 @@ $(document).ready(function(){
   
       
     $("#pressme").click(function(){
+        $(".pops").hide();
+        $("#mix-area").animate({width: '550px'},200);
         $("#img1-selector").show("500");
      });
 
     $("#pressme2").click(function(){
+       $(".pops").hide();
+       $("#mix-area").animate({width: '550px'},200);
        $("#img2-selector").show("500");
     });
 
     $("#cropme").click(function(){
 //        jcrop_api.destroy();
         $(".btnCrop").text("please wait..."); 
-        $('#crop-image1').attr('src', "srvscripts/"+image1+"?"+d.getTime());
+        $(".pops").hide();
+        $("#mix-area").animate({width: '550px'},200);
+        $('#crop-image1').attr('src', images_folder+image1+"?"+d.getTime());
         $("#crop-image1").parent().waitForImages(function() {
             $(".btnCrop").text("Crop");    
         });
@@ -100,7 +110,9 @@ $(document).ready(function(){
  
      $("#cropme2").click(function(){
         $(".btnCrop2").text("please wait..."); 
-        $('#crop-image2').attr('src', "srvscripts/"+image2+"?"+d.getTime());
+        $(".pops").hide();
+        $("#mix-area").animate({width: '550px'},100);
+        $('#crop-image2').attr('src', images_folder+image2+"?"+d.getTime());
         $("#crop-image2").parent().waitForImages(function() {
             $(".btnCrop2").text("Crop");    
         });
@@ -129,11 +141,11 @@ $(document).ready(function(){
     });
 
     $(".btnCropReset").click(function() {
-      $('#mix-image1').attr('src', "srvscripts/"+image1);
+      $('#mix-image1').attr('src', images_folder+image1);
     });
 
     $(".btnCropReset2").click(function() {
-      $('#mix-image2').attr('src', "srvscripts/"+image2);
+      $('#mix-image2').attr('src', images_folder+image2);
     });
 
     $(".close1").click(function() {
@@ -191,15 +203,14 @@ $(".btnCrop").click(function(){
             dataType: "text"
           }).done (function(data) {
                   
-                    $('#mix-image1').attr('src', "srvscripts/"+data+"?d="+d.getTime());
+                    $('#mix-image1').attr('src', images_folder+data+"?d="+d.getTime());
                     $("#mix-image1").parent().waitForImages(function() {
-                        $(".btnCrop").text("Crop"); 
+                    $(".btnCrop").text("Crop"); 
                     });
                  }
                     
              ) ;
-     
-
+   
   }
 );
 
@@ -210,7 +221,7 @@ $(".btnCrop2").click(function(){
             data: {xi1:x1, yi1: y1, wi1:w1, hi1:h1, index: 2},
             dataType: "text"
           }).done (function(data) {
-                      $('#mix-image2').attr('src', "srvscripts/"+data+"?"+d.getTime());
+                      $('#mix-image2').attr('src', images_folder+data+"?"+d.getTime());
                       $("#mix-image2").parent().waitForImages(function() {
                            $(".btnCrop2").text("Crop"); 
                        }); 
@@ -242,7 +253,7 @@ $(".btnCrop2").click(function(){
                    if (j.error === 0) {
                        image1 = j.filename;
                        
-                       $('#mix-image1').attr('src', "srvscripts/"+image1+"?"+d.getTime());
+                       $('#mix-image1').attr('src', images_folder+image1+"?"+d.getTime());
                        $("#msgLoad1").hide(100);
                   $("#mix-image1").parent().waitForImages(function() {
                        $("#ajax-loader").hide(); 
@@ -257,6 +268,8 @@ $(".btnCrop2").click(function(){
            
    
     });
+
+
 
 $("#grab2").click(function(event) {
     event.preventDefault();
@@ -281,7 +294,7 @@ $("#grab2").click(function(event) {
                 if (j2.error === 0) {
                        image2 = j2.filename;
                      
-                       $('#mix-image2').attr('src', "srvscripts/"+image2+"?"+d.getTime());
+                       $('#mix-image2').attr('src', images_folder+image2+"?"+d.getTime());
                        $("#msgLoad2").hide(100);
                    $("#mix-image2").parent().waitForImages(function() {
                        $("#ajax-loader2").hide();
@@ -301,29 +314,64 @@ $.ajax({
              url: "srvscripts/scheduled_cleanup.php"
           });
 
-/*
-$("#btnExit").click(function() {
-     $.ajax({
-             url: "srvscripts/cleanup.php"
-                        
-          }).done(function() {
-                    alert("OK!");
-                    $(".app-area").hide(1500);
-          });
+ 
+       // *************************  SAVE ********************* //
+
+$("#save").click(function(){
+    $("#save").text("please wait..");
+   
+    var width1 = $("#mix-image1").css("width");
+    var height1 = $("#mix-image1").css("height");
+    var pos1 = $("#mix-image1").offset();
+    pos1.left = pos1.left - 92;
+    var opacity1 = $("#mix-image1").css("opacity");
+    opacity1 =  Math.floor(opacity1*100);
+    var zindex1 = $("#mix-image1").parent().parent().css("z-index"); 
     
+    
+    var width2 = $("#mix-image2").css("width");
+    var height2 = $("#mix-image2").css("height");
+    var pos2 = $("#mix-image2").offset();
+    pos2.left = pos2.left - 92;
+    var opacity2 = $("#mix-image2").css("opacity");
+    opacity2 =  Math.floor(opacity2*100);
+    var zindex2 = $("#mix-image2").parent().parent().css("z-index"); 
+    
+    
+    var zindex = 0;
+    if (zindex1>zindex2) {zindex = 1;}
+    
+    //alert(zindex1);
+
+    $.ajax({
+             url: "srvscripts/save_mix.php",
+            data: {wi1:width1, hi1:height1, t1:pos1.top, l1: pos1.left, opac1:opacity1,
+                wi2:width2, hi2:height2, t2:pos2.top, l2: pos2.left, opac2: opacity2, zx:zindex},
+            type: "POST",
+            dataType: "text"
+            }).done (function(data) {
+                     // alert(data);
+                        $('#img-prev').attr('src', images_folder+data+"?"+d.getTime());
+                        $("#img-prev").parent().waitForImages(function() {
+                        $("#save").text("Save Mix"); 
+                        $("#mix-area").animate({width: '0px'},200);
+                        $(".pops").hide();
+                        $("#preview").show(100).animate({width: '500px'},200);
+                      }); 
+                }) ;
+     
+  });
+  
+   $(".prev-close").click(function() {
+            $(this).parent().parent().animate({width: '0px'},200).hide(1);
+            $("#mix-area").animate({width: '550px'},300);
+       
+    });
+
+$("#savemixes").click(function() {
+    alert("Coming soon...");
 });
 
-
-window.onbeforeunload = function(e) {
-    alert("on-beforeunload"); 
-    $.ajax({
-             url: "srvscripts/cleanup.php"
-                        
-          }).done(function(data) {
-                   alert("OK!");
-          });
-};
-*/
 
 });
 

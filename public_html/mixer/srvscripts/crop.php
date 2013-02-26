@@ -1,5 +1,5 @@
 <?php
-require_once 'functions.inc.php';
+require_once 'includes/initialize.php';
 
 session_start();
 
@@ -11,7 +11,7 @@ if ( $_GET['index'] !=1  &&  $_GET['index'] !=2 ) {exit;}
 $index = $_GET['index'];
 
 $imgfolder = $_SESSION['id'];
-$img_folder  = substr($imgfolder, 0, 10);
+$img_folder  =  IMG_FOLDER . substr($imgfolder, 0, 10);
 
 //Original image
 $filename = "{$img_folder}/image{$index}.jpg";
@@ -37,6 +37,10 @@ $cropd = $img_folder .  '/image' . $index . '_crop'. time() .'.jpg';
 $mask = $img_folder .  '/image' . $index . '_crop*.jpg';
 @array_map( "unlink", glob($mask) );
 crop_image($filename, $cropd, $dimensions);
+
+$res_filename =  $img_folder .  '/res_image' . $index . '.jpg'; 
+copy($cropd, $res_filename);
+        
 
 echo $cropd;
 

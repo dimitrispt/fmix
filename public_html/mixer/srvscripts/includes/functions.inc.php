@@ -1,4 +1,6 @@
 <?php
+require_once 'simpleimage.class.php';
+
 function jresponse($filename, $msg="", $error=0) {
     $response = array("filename"=>$filename, "msg"=>$msg, "error"=>$error);
      return json_encode($response);
@@ -99,7 +101,14 @@ function crop_image($img_file, $cropd, $dimensions) {
 
 }
     
-    
+
+function resizeImage($img, $width, $height, $newimg) {
+    $image = new SimpleImage();
+    $image->load($img);
+    $image->resize($width,$height);
+    $image->save($newimg);
+}
+
 
     /********* Alternative Script   with 'Save As' **************************************/
 

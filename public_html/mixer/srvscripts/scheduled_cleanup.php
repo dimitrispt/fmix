@@ -1,6 +1,8 @@
 <?php
+require_once 'includes/initialize.php';
 
-$dh = opendir("../srvscripts");
+if ( !($dh = opendir(IMG_FOLDER)) ) {exit;}
+
 $name = "temp";
 echo basename(__DIR__);
 
