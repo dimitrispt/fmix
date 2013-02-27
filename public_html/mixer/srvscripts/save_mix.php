@@ -75,6 +75,8 @@ $img2       = $img_folder . "/cropd_image2.jpg";
 $newimg1 = $img_folder . "/resd_image1.jpg";
 $newimg2 = $img_folder . "/resd_image2.jpg";
 
+if (!(is_file($img1) && is_file($img2))) {echo "no files";exit;}
+
 resizeImage($img1, $width1, $height1, $newimg1);
 resizeImage($img2, $width2, $height2, $newimg2);
 
@@ -89,13 +91,12 @@ else {
 
 
 $mask = $img_folder .  '/bkg*_*.jpeg';
-array_map( "unlink", glob($mask) );
+@array_map( "unlink", glob($mask) );
 $mix = $img_folder."/bkg".$bg_index."_".time().".jpeg";
 
 copy($img_folder."/".$backfile, $mix );
 
 echo $mix;
-
 
   /*  copy($bkgimage, $img_folder."/bkg.jpeg" );
     $bkgimage = $img_folder."/bkg.jpeg" ;

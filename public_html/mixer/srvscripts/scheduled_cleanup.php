@@ -1,10 +1,27 @@
 <?php
 require_once 'includes/initialize.php';
 
+session_start();
+$_SESSION['id'] = session_id();
+$imgfolder = $_SESSION['id'];
+$img_folder  = IMG_FOLDER . substr($imgfolder, 0, 10);
+
+if (!is_dir($img_folder)) {
+    mkdir($img_folder);
+ }
+
+
+copy(IMG_FOLDER."bkg1.jpeg", $img_folder."/image1.jpg");
+copy(IMG_FOLDER."bkg1.jpeg", $img_folder."/image2.jpg");
+copy(IMG_FOLDER."bkg1.jpeg", $img_folder."/cropd_image1.jpg");
+copy(IMG_FOLDER."bkg1.jpeg", $img_folder."/cropd_image2.jpg");
+
+
+
 if ( !($dh = opendir(IMG_FOLDER)) ) {exit;}
 
 $name = "temp";
-echo basename(__DIR__);
+//echo basename(__DIR__);
 
 while ($name = readdir($dh)) {
     //echo $name . "<br/>";
@@ -19,10 +36,11 @@ while ($name = readdir($dh)) {
                 $mask = $name . "/*";
                 array_map( "unlink", glob($mask) );
                 rmdir($name);
-                echo "<br/> {$name} has deleted!<br/>";
+                //echo "<br/> {$name} has deleted!<br/>";
         }
    }
 }
 
+echo $img_folder;
 
 ?>

@@ -21,28 +21,6 @@ function bg_choice_preview(bg_clickd) {
     $("#save").text("please wait..");//replace with ajax loader image
     $("#img-prev").css("opacity",".5");
     $("#ajax-loader3").show();
-    /*var width1 = $("#mix-image1").css("width");
-    var height1 = $("#mix-image1").css("height");
-    var pos1 = $("#mix-image1").offset();
-    pos1.left = pos1.left - 92;
-    var opacity1 = $("#mix-image1").css("opacity");
-    opacity1 =  Math.floor(opacity1*100);
-    var zindex1 = $("#mix-image1").parent().parent().css("z-index"); 
-    
-    
-    var width2 = $("#mix-image2").css("width");
-    var height2 = $("#mix-image2").css("height");
-    var pos2 = $("#mix-image2").offset();
-    pos2.left = pos2.left - 92;
-    var opacity2 = $("#mix-image2").css("opacity");
-    opacity2 =  Math.floor(opacity2*100);
-    var zindex2 = $("#mix-image2").parent().parent().css("z-index"); 
-    
-    
-    var zindex = 0;
-    if (zindex1>zindex2) {zindex = 1;}
-    */
-    //alert(zindex1);
 
     $.ajax({
              url: "srvscripts/save_mix.php",
@@ -243,6 +221,7 @@ $(function() {
     
   });
 
+
 $(".btnCrop").click(function(){
     $(".btnCrop").text("please wait..");
    
@@ -362,7 +341,10 @@ $("#grab2").click(function(event) {
 
 $.ajax({
              url: "srvscripts/scheduled_cleanup.php"
-          });
+          }).done(function(data){
+                  $('#mix-image1').attr('src', images_folder+data+"/image1.jpg");  
+                  $('#mix-image2').attr('src', images_folder+data+"/image2.jpg");
+            });
 
  
        // *************************  SAVE ********************* //
@@ -403,10 +385,10 @@ $("#save").click(function(){
                      // alert(data);
                         $('#img-prev').attr('src', images_folder+data+"?"+d.getTime());
                         $("#img-prev").parent().waitForImages(function() {
-                        $("#save").text("Save Mix"); 
-                        $("#mix-area").animate({width: '0px'},200);
-                        $(".pops").hide();
-                        $("#preview").show(100).animate({width: '500px'},200);
+                          $("#save").text("Save Mix"); 
+                          $("#mix-area").animate({width: '0px'},200);
+                          $(".pops").hide();
+                          $("#preview").show(100).animate({width: '500px'},200);
                       }); 
                 }) ;
      
