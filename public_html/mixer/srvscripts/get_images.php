@@ -31,8 +31,8 @@ switch (pathinfo($url, PATHINFO_EXTENSION)) {
         gif2jpeg($filename, $img_folder . '/image' . $index . '.jpg');
         $filename =  $img_folder .  '/image' . $index . '.jpg';
         
-        $res_filename =  $img_folder .  '/res_image' . $index . '.jpg'; 
-        copy($filename, $res_filename);
+        $cropd_filename =  $img_folder .  '/cropd_image' . $index . '.jpg'; 
+        copy($filename, $cropd_filename);
         
         header('Content-Type: application/json');
         echo jresponse($filename);
@@ -44,8 +44,8 @@ switch (pathinfo($url, PATHINFO_EXTENSION)) {
         $filename = $img_folder . '/image' . $index . '.' . pathinfo($url, PATHINFO_EXTENSION);
         img2file($url, $filename);
         
-        $res_filename =  $img_folder .  '/res_image' . $index . '.jpg'; 
-        copy($filename, $res_filename);
+        $cropd_filename =  $img_folder .  '/cropd_image' . $index . '.jpg'; 
+        copy($filename, $cropd_filename);
         
         header('Content-Type: application/json');
         echo jresponse($filename);

@@ -2,6 +2,9 @@ var x1, y1, h1, w1;
 var jcrop_api, jcrop_api2;
 d = new Date();
 var image1, image2;
+var bg_clicked = 1;
+
+var width1,height1,pos1,opacity1,width2,height2,pos2,opacity2,zindex;
 
 var images_folder = "srvscripts/"; //location of images folder
 
@@ -12,6 +15,53 @@ var images_folder = "srvscripts/"; //location of images folder
 
 
 $.ajaxSetup({ cache: false });
+
+
+function bg_choice_preview(bg_clickd) {
+    $("#save").text("please wait..");//replace with ajax loader image
+    $("#img-prev").css("opacity",".5");
+    $("#ajax-loader3").show();
+    /*var width1 = $("#mix-image1").css("width");
+    var height1 = $("#mix-image1").css("height");
+    var pos1 = $("#mix-image1").offset();
+    pos1.left = pos1.left - 92;
+    var opacity1 = $("#mix-image1").css("opacity");
+    opacity1 =  Math.floor(opacity1*100);
+    var zindex1 = $("#mix-image1").parent().parent().css("z-index"); 
+    
+    
+    var width2 = $("#mix-image2").css("width");
+    var height2 = $("#mix-image2").css("height");
+    var pos2 = $("#mix-image2").offset();
+    pos2.left = pos2.left - 92;
+    var opacity2 = $("#mix-image2").css("opacity");
+    opacity2 =  Math.floor(opacity2*100);
+    var zindex2 = $("#mix-image2").parent().parent().css("z-index"); 
+    
+    
+    var zindex = 0;
+    if (zindex1>zindex2) {zindex = 1;}
+    */
+    //alert(zindex1);
+
+    $.ajax({
+             url: "srvscripts/save_mix.php",
+            data: {wi1:width1, hi1:height1, t1:pos1.top, l1: pos1.left, opac1:opacity1,
+                wi2:width2, hi2:height2, t2:pos2.top, l2: pos2.left, opac2: opacity2, zx:zindex, bg_index: bg_clickd},
+            type: "POST",
+            dataType: "text"
+            }).done (function(data) {
+                     // alert(data);
+                        $('#img-prev').attr('src', images_folder+data+"?"+d.getTime());
+                        $("#img-prev").parent().waitForImages(function() {
+                        $("#save").text("Save Mix"); //replace with stopping ajax loader image
+                        $("#ajax-loader3").hide();
+                        $("#img-prev").css("opacity","1");
+                        
+                      }); 
+                }) ;
+}
+
 
 
 function showInstructResize(img) {
@@ -320,25 +370,25 @@ $.ajax({
 $("#save").click(function(){
     $("#save").text("please wait..");
    
-    var width1 = $("#mix-image1").css("width");
-    var height1 = $("#mix-image1").css("height");
-    var pos1 = $("#mix-image1").offset();
+    width1 = $("#mix-image1").css("width");
+    height1 = $("#mix-image1").css("height");
+    pos1 = $("#mix-image1").offset();
     pos1.left = pos1.left - 92;
-    var opacity1 = $("#mix-image1").css("opacity");
+    opacity1 = $("#mix-image1").css("opacity");
     opacity1 =  Math.floor(opacity1*100);
-    var zindex1 = $("#mix-image1").parent().parent().css("z-index"); 
+    zindex1 = $("#mix-image1").parent().parent().css("z-index"); 
     
     
-    var width2 = $("#mix-image2").css("width");
-    var height2 = $("#mix-image2").css("height");
-    var pos2 = $("#mix-image2").offset();
+    width2 = $("#mix-image2").css("width");
+    height2 = $("#mix-image2").css("height");
+    pos2 = $("#mix-image2").offset();
     pos2.left = pos2.left - 92;
-    var opacity2 = $("#mix-image2").css("opacity");
+    opacity2 = $("#mix-image2").css("opacity");
     opacity2 =  Math.floor(opacity2*100);
-    var zindex2 = $("#mix-image2").parent().parent().css("z-index"); 
+    zindex2 = $("#mix-image2").parent().parent().css("z-index"); 
     
     
-    var zindex = 0;
+    zindex = 0;
     if (zindex1>zindex2) {zindex = 1;}
     
     //alert(zindex1);
@@ -346,7 +396,7 @@ $("#save").click(function(){
     $.ajax({
              url: "srvscripts/save_mix.php",
             data: {wi1:width1, hi1:height1, t1:pos1.top, l1: pos1.left, opac1:opacity1,
-                wi2:width2, hi2:height2, t2:pos2.top, l2: pos2.left, opac2: opacity2, zx:zindex},
+                wi2:width2, hi2:height2, t2:pos2.top, l2: pos2.left, opac2: opacity2, zx:zindex, bg_index: bg_clicked},
             type: "POST",
             dataType: "text"
             }).done (function(data) {
@@ -372,9 +422,10 @@ $("#savemixes").click(function() {
     alert("Coming soon...");
 });
 
-
+$(".bkg-prev").click(function() {
+    bg_clicked = $(".bkg-prev").index(this) + 1;
+    
+    bg_choice_preview(bg_clicked);
 });
 
-
-
-
+});

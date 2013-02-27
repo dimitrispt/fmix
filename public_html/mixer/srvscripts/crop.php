@@ -38,9 +38,8 @@ $mask = $img_folder .  '/image' . $index . '_crop*.jpg';
 @array_map( "unlink", glob($mask) );
 crop_image($filename, $cropd, $dimensions);
 
-$res_filename =  $img_folder .  '/res_image' . $index . '.jpg'; 
-copy($cropd, $res_filename);
-        
+$cropd_filename =  $img_folder .  '/cropd_image' . $index . '.jpg'; 
+copy($cropd, $cropd_filename);
 
 echo $cropd;
 

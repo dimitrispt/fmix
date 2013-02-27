@@ -309,6 +309,18 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#aaaaaa', end
     padding: 1px;
 }
 
+.prev-ajax-loader {
+  position: absolute; 
+  left: 267px;
+  top: 350px;
+  display: none;
+  border-radius: 50%;
+  z-index:10;
+  font-size: 29px;
+  width: .20em;
+  height: .20em;
+
+}
 
 /*************************************************************/
 /***************MIX AREA***********/
