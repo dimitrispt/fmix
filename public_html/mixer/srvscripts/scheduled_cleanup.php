@@ -11,10 +11,10 @@ if (!is_dir($img_folder)) {
  }
 
 
-copy(IMG_FOLDER."bkg1.jpeg", $img_folder."/image1.jpg");
-copy(IMG_FOLDER."bkg1.jpeg", $img_folder."/image2.jpg");
-copy(IMG_FOLDER."bkg1.jpeg", $img_folder."/cropd_image1.jpg");
-copy(IMG_FOLDER."bkg1.jpeg", $img_folder."/cropd_image2.jpg");
+copy(IMG_FOLDER."image1.jpg", $img_folder."/image1.jpg");
+copy(IMG_FOLDER."image2.jpg", $img_folder."/image2.jpg");
+copy(IMG_FOLDER."image1.jpg", $img_folder."/cropd_image1.jpg");
+copy(IMG_FOLDER."image2.jpg", $img_folder."/cropd_image2.jpg");
 
 
 

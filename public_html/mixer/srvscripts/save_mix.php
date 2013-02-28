@@ -96,6 +96,9 @@ $mix = $img_folder."/bkg".$bg_index."_".time().".jpeg";
 
 copy($img_folder."/".$backfile, $mix );
 
+$mask = $img_folder .  '/bkg?.jpeg';
+@array_map( "unlink", glob($mask) );
+
 echo $mix;
 
   /*  copy($bkgimage, $img_folder."/bkg.jpeg" );

@@ -170,10 +170,18 @@ $(document).ready(function(){
 
     $(".btnCropReset").click(function() {
       $('#mix-image1').attr('src', images_folder+image1);
+      $.ajax({
+          url: 'srvscripts/reset-crop.php',
+          data: {index:1}
+      });
     });
 
     $(".btnCropReset2").click(function() {
       $('#mix-image2').attr('src', images_folder+image2);
+       $.ajax({
+          url: 'srvscripts/reset-crop.php',
+         data: {index:2}
+      });
     });
 
     $(".close1").click(function() {
