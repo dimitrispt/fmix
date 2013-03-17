@@ -20,7 +20,10 @@ $.ajaxSetup({ cache: false });
      
      var images =  jQuery.parseJSON(data);
      
-     var images_url_html = '<div style="text-align: right;margin-top:-5px;margin-right:-20px;">'+
+     var images_url_html = ' <div class="ajax-loader" id="ajax-loader-url">'+
+                           '<img src="styles/ajax-loader.gif">'+
+                            '</div>'+
+                            '<div style="text-align: right;margin-top:-5px;margin-right:-20px;">'+
                             '<img src="styles/close2.png" class="url-close"></div>';
      
      images_url_html += "Choose the image you'd like to load:<br/><p>"+
@@ -41,6 +44,8 @@ $.ajaxSetup({ cache: false });
      $("#images_url").show(10).animate({width: '500px'},200);
      
     $(".image_url"+index).click(function() {
+        $("#ajax-loader-url").show();
+        $(this).css("opacity","0.6");
         imgindex = $(".image_url"+index).index(this);
        // index = 1;
         $.ajax({
@@ -63,7 +68,9 @@ $.ajaxSetup({ cache: false });
                            $('#mix-image'+index).attr('src', images_folder+image+"?t="+d.getTime());
                            
                       $("#mix-image"+index).parent().waitForImages(function() {
-                          $(".pops").hide();
+                            $("#ajax-loader-url").hide();
+                            $(this).css("opacity","1");
+                            $(".pops").hide();
                             $("#images_url").animate({width: '0px'},200).hide();
                             $("#mix-area").show(10).animate({width: '550px'},200);
      
