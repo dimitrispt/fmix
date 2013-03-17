@@ -16,6 +16,26 @@
 
 }
 
+
+.close1, .crop-close1, .crop-close2 {
+    opacity:0.9;
+    position:relative;
+    top:-17px;
+    left: 20px;
+}
+
+.prev-close, .url-close {
+    opacity:0.9;
+    position:relative;
+    top:0px;
+    left: 10px;
+}
+
+.close1:hover, .crop-close1:hover, .crop-close2:hover, .prev-close:hover, .url-close:hover {
+    opacity:1;
+    cursor: pointer;
+}
+
 .controls {
     background: rgb(165,165,165); /* Old browsers */
 background: -moz-linear-gradient(left,  rgba(165,165,165,1) 10%, rgba(206,206,206,1) 100%); /* FF3.6+ */
@@ -50,7 +70,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a5a5a5', end
  /*   border: 1px solid;*/
     margin-bottom: 5px;
 }
-#cropme, #cropme2 {
+#cropme1, #cropme2 {
    /* border: 1px solid;*/
     margin-bottom: 5px;
 
@@ -89,6 +109,9 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
    
 }
 
+#enter_url, #enter_url2 {
+    color:#888;
+}
 
 .results {
     width: 420px;
@@ -255,7 +278,7 @@ div .acontrols {
     color: #2779aa;*/
 }
 
-#preview {
+#preview, #images_url {
 background: -moz-linear-gradient(left,  rgba(155,155,155,1) 0%, rgba(183,183,183,0.89) 100%); /* FF3.6+ */
 background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(155,155,155,1)), color-stop(100%,rgba(183,183,183,0.89))); /* Chrome,Safari4+ */
 background: -webkit-linear-gradient(left,  rgba(155,155,155,1) 0%,rgba(183,183,183,0.89) 100%); /* Chrome10+,Safari5.1+ */
@@ -320,6 +343,18 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#aaaaaa', end
   width: .20em;
   height: .20em;
 
+}
+
+.image_url1, .image_url2 {
+    float: left;
+    width: 150px;
+    height: 200px;
+    margin:2px;
+    opacity: 0.7;
+}
+
+.image_url1:hover, .image2_url:hover {
+   opacity: 1;
 }
 
 /*************************************************************/

@@ -16,6 +16,75 @@ var images_folder = "srvscripts/"; //location of images folder
 
 $.ajaxSetup({ cache: false });
 
+ function load_images_url(data, index) {
+     
+     var images =  jQuery.parseJSON(data);
+     
+     var images_url_html = '<div style="text-align: right;margin-top:-5px;margin-right:-20px;">'+
+                            '<img src="styles/close2.png" class="url-close"></div>';
+     
+     images_url_html += "Choose the image you'd like to load:<br/><p>"+
+             "<table>";
+     
+     $.each(images, function(i, img){
+     images_url_html += '<tr><a href="#"><img class="image_url'+index
+             +'" src="'+images_folder+img+'"/></a></tr>';
+     });
+     
+     images_url_html += "</table></p>";
+     
+     $("#images_url").html(images_url_html);
+     
+   
+     $(".pops").hide();
+     $("#mix-area").animate({width: '0px'},200).hide();
+     $("#images_url").show(10).animate({width: '500px'},200);
+     
+    $(".image_url"+index).click(function() {
+        imgindex = $(".image_url"+index).index(this);
+       // index = 1;
+        $.ajax({
+            url: "srvscripts/get_images_url.php",
+            data: {imgi: imgindex, mixindex: index},
+            type: "GET"
+        }).done(function(j) {
+                        
+                        if (j.error !== 0) {
+                               
+                                alert(j.msg);
+                           }
+
+                     if (j.error === 0) { 
+
+                           image = j.filename;
+                           if (index===1) {image1 = image;}
+                           else if (index===2) {image2 = image;}
+                           
+                           $('#mix-image'+index).attr('src', images_folder+image+"?t="+d.getTime());
+                           
+                      $("#mix-image"+index).parent().waitForImages(function() {
+                          $(".pops").hide();
+                            $("#images_url").animate({width: '0px'},200).hide();
+                            $("#mix-area").show(10).animate({width: '550px'},200);
+     
+                        
+                           $("#cropme"+index).removeAttr('disabled');
+                           $( "#slider"+index ).slider("option", "disabled", false);
+                           showInstructResize(index);
+
+                      });
+
+
+                  }
+               });
+    });
+    $(".url-close").click(function() {
+        $("#images_url").animate({width: '0px'},200).hide();
+        $("#mix-area").show(10).animate({width: '550px'},200);
+    });
+}
+
+
 
 function bg_choice_preview(bg_clickd) {
     $("#save").text("please wait..");//replace with ajax loader image
@@ -30,7 +99,7 @@ function bg_choice_preview(bg_clickd) {
             dataType: "text"
             }).done (function(data) {
                      // alert(data);
-                        $('#img-prev').attr('src', images_folder+data+"?"+d.getTime());
+                        $('#img-prev').attr('src', images_folder+data+"?t="+d.getTime());
                         $("#img-prev").parent().waitForImages(function() {
                         $("#save").text("Save Mix"); //replace with stopping ajax loader image
                         $("#ajax-loader3").hide();
@@ -70,7 +139,7 @@ function showInstructResize(img) {
 
        $("#instructResize2").css("top", instructTop).css("left", instructLeft);
        $("#instructResize2").fadeIn(800).delay(2800).fadeOut(700);
-                
+       
     }
 }
 
@@ -105,22 +174,24 @@ $(document).ready(function(){
       
     $("#pressme").click(function(){
         $(".pops").hide();
-        $("#mix-area").animate({width: '550px'},200);
+        $("#mix-area").show(10).animate({width: '550px'},200);
         $("#img1-selector").show("500");
+         
      });
 
     $("#pressme2").click(function(){
        $(".pops").hide();
-       $("#mix-area").animate({width: '550px'},200);
+       $("#mix-area").show(10).animate({width: '550px'},200);
        $("#img2-selector").show("500");
+        
     });
 
-    $("#cropme").click(function(){
+    $("#cropme1").click(function(){
 //        jcrop_api.destroy();
         $(".btnCrop").text("please wait..."); 
         $(".pops").hide();
-        $("#mix-area").animate({width: '550px'},200);
-        $('#crop-image1').attr('src', images_folder+image1+"?"+d.getTime());
+        $("#mix-area").show(10).animate({width: '550px'},200);
+        $('#crop-image1').attr('src', images_folder+image1+"?t="+d.getTime());
         $("#crop-image1").parent().waitForImages(function() {
             $(".btnCrop").text("Crop");    
         });
@@ -139,8 +210,8 @@ $(document).ready(function(){
      $("#cropme2").click(function(){
         $(".btnCrop2").text("please wait..."); 
         $(".pops").hide();
-        $("#mix-area").animate({width: '550px'},100);
-        $('#crop-image2').attr('src', images_folder+image2+"?"+d.getTime());
+        $("#mix-area").show(10).animate({width: '550px'},100);
+        $('#crop-image2').attr('src', images_folder+image2+"?t="+d.getTime());
         $("#crop-image2").parent().waitForImages(function() {
             $(".btnCrop2").text("Crop");    
         });
@@ -188,6 +259,8 @@ $(document).ready(function(){
         $(this).parent().parent().fadeOut("200");
         
     });
+
+
 
     $(".img-div").click(function() {
          $(".img-div").css("z-index","1");
@@ -240,7 +313,7 @@ $(".btnCrop").click(function(){
             dataType: "text"
           }).done (function(data) {
                   
-                    $('#mix-image1').attr('src', images_folder+data+"?d="+d.getTime());
+                    $('#mix-image1').attr('src', images_folder+data+"?t="+d.getTime());
                     $("#mix-image1").parent().waitForImages(function() {
                     $(".btnCrop").text("Crop"); 
                     });
@@ -258,7 +331,7 @@ $(".btnCrop2").click(function(){
             data: {xi1:x1, yi1: y1, wi1:w1, hi1:h1, index: 2},
             dataType: "text"
           }).done (function(data) {
-                      $('#mix-image2').attr('src', images_folder+data+"?"+d.getTime());
+                      $('#mix-image2').attr('src', images_folder+data+"?t="+d.getTime());
                       $("#mix-image2").parent().waitForImages(function() {
                            $(".btnCrop2").text("Crop"); 
                        }); 
@@ -280,30 +353,38 @@ $(".btnCrop2").click(function(){
             
           }).done (function(data) {
                    var j = jQuery.parseJSON(data);
-                                    
-                   if (j.error !== 0) {
+                
+          
+                    if (j.error !== 0) {
                             $("#ajax-loader").hide();
                             $("#grab").text("Load");
                             alert(j.msg);
                        }
-                           
-                   if (j.error === 0) {
+              
+                   if (j.error === 0) { 
+                     if (j.array === 0) {
                        image1 = j.filename;
                        
-                       $('#mix-image1').attr('src', images_folder+image1+"?"+d.getTime());
+                       $('#mix-image1').attr('src', images_folder+image1+"?t="+d.getTime());
                        $("#msgLoad1").hide(100);
                   $("#mix-image1").parent().waitForImages(function() {
                        $("#ajax-loader").hide(); 
                        $("#img1-selector").fadeOut(200);
                        $("#grab").text("Load");
-                       $("#cropme").removeAttr('disabled');
+                       $("#cropme1").removeAttr('disabled');
                        $( "#slider1" ).slider("option", "disabled", false);
                        showInstructResize(1);
-                        });
-                       }
-                   });
+                       
+                  });
+                       }else if (j.array ===1 ) {
+                            $("#images_url").css("overflow","auto");
+                            $("#ajax-loader").hide(); 
+                            $("#grab").text("Load");
+                            load_images_url(j.filename,1);
+                         }
+                  }
+               });
            
-   
     });
 
 
@@ -329,9 +410,10 @@ $("#grab2").click(function(event) {
                 }
                        
                 if (j2.error === 0) {
+                    if (j2.array === 0) {
                        image2 = j2.filename;
                      
-                       $('#mix-image2').attr('src', images_folder+image2+"?"+d.getTime());
+                       $('#mix-image2').attr('src', images_folder+image2+"?t="+d.getTime());
                        $("#msgLoad2").hide(100);
                    $("#mix-image2").parent().waitForImages(function() {
                        $("#ajax-loader2").hide();
@@ -341,11 +423,19 @@ $("#grab2").click(function(event) {
                        $( "#slider2" ).slider("option", "disabled", false);
                        showInstructResize(2); 
                    });
-                 }
+                 }else if (j2.array ===1 ) {
+                        $("#images_url").css("overflow","auto");
+                        $("#ajax-loader2").hide(); 
+                        $("#grab2").text("Load");
+                        load_images_url(j2.filename,2);
+                                             
+                    }
+             
+             }
             
-            }) ;
+       }) ;
    
-    });
+  });
 
 $.ajax({
              url: "srvscripts/scheduled_cleanup.php"
@@ -391,20 +481,20 @@ $("#save").click(function(){
             dataType: "text"
             }).done (function(data) {
                      // alert(data);
-                        $('#img-prev').attr('src', images_folder+data+"?"+d.getTime());
+                        $('#img-prev').attr('src', images_folder+data+"?t="+d.getTime());
                         $("#img-prev").parent().waitForImages(function() {
                           $("#save").text("Save Mix"); 
-                          $("#mix-area").animate({width: '0px'},200);
+                          $("#mix-area").animate({width: '0px'},200).hide(200);
                           $(".pops").hide();
-                          $("#preview").show(100).animate({width: '500px'},200);
+                          $("#preview").show(10).animate({width: '500px'},200);
                       }); 
                 }) ;
      
   });
   
    $(".prev-close").click(function() {
-            $(this).parent().parent().animate({width: '0px'},200).hide(1);
-            $("#mix-area").animate({width: '550px'},300);
+            $(this).parent().parent().animate({width: '0px'},200).hide(10);
+            $("#mix-area").show(10).animate({width: '550px'},300);
        
     });
 
@@ -416,6 +506,16 @@ $(".bkg-prev").click(function() {
     bg_clicked = $(".bkg-prev").index(this) + 1;
     
     bg_choice_preview(bg_clicked);
+});
+
+$("#enter_url, #enter_url2").focusin(function() {
+    $(this).attr("value", "");
+    $(this).css("color", "#000");
+});
+
+$("#enter_url, #enter_url2").focusout(function() {
+    $(this).css("color", "#888");
+   
 });
 
 });

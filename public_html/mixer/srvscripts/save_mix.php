@@ -5,41 +5,7 @@ session_start();
 $_SESSION['id'] = session_id();
 
 
-
-function resizeImage($img, $width, $height, $newimg) {
-     
-    $image = new SimpleImage();
-    $image->load($img);
-    $image->resize($width,$height);
-    $image->save($newimg);
-}
-
-function mergeImages($bkgimage, $newimg1, $newimg2, $top1, $left1, $w1, $h1, 
-                        $top2, $left2,$w2, $h2, $opacity1, $opacity2,$bg_index) {
-    
-    $imgfolder = $_SESSION['id'];
-    $img_folder  = IMG_FOLDER . substr($imgfolder, 0, 10);
-    copy($bkgimage, $img_folder."/bkg".$bg_index.".jpeg" );
-    $bkgimage = $img_folder."/bkg".$bg_index.".jpeg" ;
-    
-    $background = imagecreatefromjpeg($bkgimage);
-    $image1 = imagecreatefromjpeg($newimg1);
-    $image2 = imagecreatefromjpeg($newimg2);
-
-    imagecopymerge($background, $image1, $left1, $top1, 0, 0, $w1, $h1, $opacity1);
-    imagejpeg($background, $bkgimage );
-    
-    $background = imagecreatefromjpeg($bkgimage);
-    imagecopymerge($background, $image2, $left2, $top2, 0, 0, $w2, $h2, $opacity2);
-    imagejpeg($background, $bkgimage );
-    
-    imagedestroy($background);
-    imagedestroy($image1);
-    imagedestroy($image2);
-    
-}
-
-    
+//retrieve POST parameters
 $width1   = intval($_POST['wi1']);
 $height1  = intval($_POST['hi1']);
 $top1      = intval($_POST['t1']);
@@ -64,7 +30,7 @@ if (!(  is_numeric($top1) && is_numeric($left1)
 if (!(  is_numeric($opacity1) && is_numeric($opacity2) 
        && is_numeric($zindex) && is_numeric($bg_index) )){exit;}
        
-
+//set sessions' folder and chosen background
 $imgfolder = $_SESSION['id'];
 $img_folder  = IMG_FOLDER . substr($imgfolder, 0, 10);
 $backfile = "bkg".$bg_index.".jpeg";
@@ -77,9 +43,11 @@ $newimg2 = $img_folder . "/resd_image2.jpg";
 
 if (!(is_file($img1) && is_file($img2))) {echo "no files";exit;}
 
+//Resize images to much the resizable-images dimensions at the front-end
 resizeImage($img1, $width1, $height1, $newimg1);
 resizeImage($img2, $width2, $height2, $newimg2);
 
+//Merge with an order as such to much the z-index at the front-end
 if ($zindex == 1) {
     mergeImages($bkgimage, $newimg2, $newimg1, $top2,$left2, $width2, $height2,
                 $top1, $left1, $width1, $height1, $opacity2, $opacity1,$bg_index);
@@ -89,27 +57,18 @@ else {
                 $top2, $left2, $width2, $height2, $opacity1, $opacity2,$bg_index);
 }
 
-
+//delete previous mixes
 $mask = $img_folder .  '/bkg*_*.jpeg';
 @array_map( "unlink", glob($mask) );
 $mix = $img_folder."/bkg".$bg_index."_".time().".jpeg";
 
 copy($img_folder."/".$backfile, $mix );
 
+//delete the (empty) backgrounds
 $mask = $img_folder .  '/bkg?.jpeg';
 @array_map( "unlink", glob($mask) );
 
+//output the location of the mix
 echo $mix;
-
-  /*  copy($bkgimage, $img_folder."/bkg.jpeg" );
-    $bkgimage = $img_folder."/bkg.jpeg" ;
-    
-    $background = imagecreatefromjpeg($bkgimage);
-    $image1 = imagecreatefromjpeg($newimg1);
-    $image2 = imagecreatefromjpeg($newimg2);
-
-    echo imagecopymerge($background, $image1, 100, 100, 0, 0, $width1, $height1, 75);
-    echo imagejpeg($background, $bkgimage );
-*/
 
 ?>

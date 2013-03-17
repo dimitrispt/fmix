@@ -32,7 +32,12 @@ while ($name = readdir($dh)) {
     
         //79200 = 23 hours
         if (   ($age>79200)  &&  ($name !=".") && ($name !="..")     ){
-
+                
+                 //Remove temp subfolder
+                    $mask = $name .  '/temp/*';
+                    @array_map( "unlink", glob($mask) );
+                    @rmdir($name."/temp");
+                    
                 $mask = $name . "/*";
                 array_map( "unlink", glob($mask) );
                 rmdir($name);

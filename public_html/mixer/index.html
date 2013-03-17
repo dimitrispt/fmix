@@ -10,7 +10,6 @@
         <link rel="stylesheet" href="Jcrop/css/jquery.Jcrop.css" type="text/css" />
 
         <link href="styles/fashionmix.css" rel="stylesheet" type="text/css">
-        
         <link href='http://fonts.googleapis.com/css?family=Vast+Shadow' rel='stylesheet' type='text/css'>
          
     </head>
@@ -48,7 +47,7 @@
                     <div style="float:left;">
                     <b>Image 1 Controls</b><br/>
                     <button class="ctrlBtn" id="pressme">Load</button><br/>
-                    <button class="ctrlBtn" id="cropme" disabled>Crop</button><br/>
+                    <button class="ctrlBtn" id="cropme1" disabled>Crop</button><br/>
                     </div>
                     <br/>
                     
@@ -63,11 +62,12 @@
                 
                 <div class="img-selector pops" id="img1-selector">
                     <div style="text-align: right;margin-top:-15px;margin-right:-10px;">
-                    <a href="#" class="close1">close</a>
+                    <img src="styles/close.png" class="close1"/>
                     </div>
-                   
-                        Enter an Image URL:
-                        <input id="enter_url" type="text" size="50" /><br/>
+                        
+                       Find Image(s):
+                        <input id="enter_url" type="text" size="50"
+                               value="http://" /><br/>
                         <div style="text-align:center;margin-top:5px;"> and press 
                             <button class="ctrlBtn" id="grab" name="grab">Load</button>
                         </div>
@@ -86,7 +86,7 @@
                 
                 <div class="img-cropper pops" id="img1-cropper">
                     <div style="text-align: right;margin-top:-15px;margin-right:-10px;">
-                    <a href="#" class="crop-close1">Close</a></div>
+                    <img src="styles/close.png" class="crop-close1"/></div>
                     <img class="crop-image" id="crop-image1" style="width:250px; height:250px;"
                        src=""/>
                     <div class="ajax-loader" id="ajax-loader_crop"></div>
@@ -116,10 +116,11 @@
              
                 <div class="img-selector pops" id="img2-selector"> 
                     <div style="text-align: right;margin-top:-15px;margin-right:-10px;">
-                        <a href="#" class="close1">close</a></div>
+                        <img src="styles/close.png" class="close1"></div>
                     
                    
-                           Enter an Image URL:<input id="enter_url2" type="text" size="45" /><br/>
+                           Find Image(s):<input id="enter_url2" type="text" size="45" 
+                                                value="http://"/><br/>
                            <div style="text-align:center;"> and press 
                                 <button class="ctrlBtn" id="grab2" name="grab">Load</button>
                            </div>
@@ -140,7 +141,7 @@
                 </div>
                                 <div class="img-cropper pops" id="img2-cropper">
                                     <div style="text-align: right;margin-top:-15px;margin-right:-10px;">
-                                    <a href="#" class="crop-close2">Close</a></div>
+                                    <img src="styles/close.png" class="crop-close2"/></div>
                     
                                     <img class="crop-image" id="crop-image2" style="width:250px; height:250px;" 
                        src=""/>
@@ -156,7 +157,7 @@
                   <!-- ************* PREVIEW SAVE************* -->
              <div class="pops" id="preview">
              <div style="text-align: right;margin-top:-5px;margin-right:-20px;">
-                            <a href="#" class="prev-close">Close</a></div>
+                            <img src="styles/close2.png" class="prev-close"></div>
                  <div id="bkg-choose">
                      
                      Choose your background:<br/>
@@ -195,7 +196,7 @@
                 <button class="ctrlBtn" id="savemixes" name="savemixes" disabled>Save on My Mixes</button>
              </div>
                     
-                    
+             <div class="pops" id="images_url"></div>
          </div>
       
             <script type="text/javascript">

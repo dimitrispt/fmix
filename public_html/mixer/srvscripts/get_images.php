@@ -1,7 +1,7 @@
 <?php
 require_once 'includes/initialize.php';
 
-//Check for domain-origin of request
+//Check for domain-origin of request!!!!!!!!
 
 
 session_start();
@@ -65,11 +65,69 @@ switch (pathinfo($url, PATHINFO_EXTENSION)) {
 
 
     default:
-        header('Content-Type: application/json');
-        echo jresponse(null, 'Sorry.. this is not a valid Image URL. ', 1);
+        $a = @getimagesize($url);
+        $image_type = $a[2];
+
+        switch ($image_type) {  
+               case IMAGETYPE_GIF:
+                    $filename = $img_folder . '/image' . $index . '.gif';
+                    img2file($url, $filename);
+                    gif2jpeg($filename, $img_folder . '/image' . $index . '.jpg');
+                    $filename =  $img_folder .  '/image' . $index . '.jpg';
         
-        break;
-}
+                    $cropd_filename =  $img_folder .  '/cropd_image' . $index . '.jpg'; 
+                    copy($filename, $cropd_filename);
+        
+                    header('Content-Type: application/json');
+                    echo jresponse($filename);
+                    exit;
+                    break;
+               
+               case IMAGETYPE_JPEG:
+                    $filename = $img_folder . '/image' . $index . '.jpg';
+                    img2file($url, $filename);
+        
+                    $cropd_filename =  $img_folder .  '/cropd_image' . $index . '.jpg'; 
+                    copy($filename, $cropd_filename);
+        
+                    header('Content-Type: application/json');
+                    echo jresponse($filename);
+                    exit;
+                    break;
+               
+                case IMAGETYPE_PNG:
+                    header('Content-Type: application/json');
+                    echo jresponse(null, "Oops.. PNG images are not supported yet! Sorry..", 1);
+                    exit;
+                    break;
+                   
+               default:
+                   if (!startsWith($url, "http://") && !startsWith($url, "https://")) {
+                       $url = "http://".$url;
+                   }
+                   
+                   $images_r = get_images_from_url($url, $img_folder."/temp", 200, 200);
+                   header('Content-Type: application/json');
+                        
+                   if ( !empty($images_r) ) {
+                      // $i = 0;
+                       $images = array();
+                       
+                       foreach ($images_r as $image) {
+                           $images[] = $image;
+                          // unset($images_r[$i]);
+                       //   $i++;
+                       }
+                       $_SESSION['images'] = $images;
+                        echo jresponse(json_encode($images), NULL, 0, 1);
+                   }
+                   else {
+                        echo jresponse(null, 'Sorry.. We couldn\'t find any valid images. ', 1,0);
+                   }
+                   
+                   break;
+            }
+  }
 
 
 ?>
