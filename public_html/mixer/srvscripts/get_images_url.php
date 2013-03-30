@@ -2,7 +2,7 @@
 require_once 'includes/initialize.php';
 
 //Check for domain-origin of request!!!!!!!!
-
+$time = time();
 
 session_start();
 
@@ -39,25 +39,25 @@ echo jresponse($filename, NULL, 0, 0);
 switch (pathinfo($url, PATHINFO_EXTENSION)) {
 
     case 'gif':
-        $filename = $img_folder . '/image' . $index . '.' . pathinfo($url, PATHINFO_EXTENSION);
-        copy($url, $filename);
-        gif2jpeg($filename, $img_folder . '/image' . $index . '.jpg');
-        $filename =  $img_folder .  '/image' . $index . '.jpg';
-        
-        $cropd_filename =  $img_folder .  '/cropd_image' . $index . '.jpg'; 
-        copy($filename, $cropd_filename);
-        
+        $filename = $img_folder . '/image' . $index ."_".$time.  '.gif';
+        img2file($url, $filename);
+        $new_filename =  $img_folder .  '/image' . $index ."_".$time. '.jpg';
+        gif2jpeg($filename, $new_filename);
+
+        $cropd_filename =  $img_folder .  '/cropd_image' . $index . '.jpg';
+        copy($new_filename, $cropd_filename);
+
         header('Content-Type: application/json');
-        echo jresponse($filename);
+        echo jresponse($new_filename);
         exit;
         break;
-    
+
     case 'jpg':
     case 'jpeg':
-        $filename = $img_folder . '/image' . $index . '.' . pathinfo($url, PATHINFO_EXTENSION);
+        $filename = $img_folder . '/image' . $index ."_".$time. '.' . pathinfo($url, PATHINFO_EXTENSION);
         copy($url, $filename);
         
-        $cropd_filename =  $img_folder .  '/cropd_image' . $index . '.jpg'; 
+        $cropd_filename =  $img_folder .  '/cropd_image' . $index . '.jpg';
         copy($filename, $cropd_filename);
         
         header('Content-Type: application/json');

@@ -64,14 +64,16 @@
                     <div style="text-align: right;margin-top:-15px;margin-right:-10px;">
                     <img src="styles/close.png" class="close1"/>
                     </div>
-                        
-                       Find Image(s):
+                       
+                    <form>
+                        <label for="enter_url"> Find Image(s):
                         <input id="enter_url" type="text" size="50"
-                               value="http://" /><br/>
+                               value="http://" /></label><br/>
                         <div style="text-align:center;margin-top:5px;"> and press 
-                            <button class="ctrlBtn" id="grab" name="grab">Load</button>
+                            <button class="ctrlBtn" id="grab">Load</button>
                         </div>
-                        
+                    </form>
+                    
                         <div style="text-align:left; padding-top:12px;">
                           <span style="font-size:11px;">Currently supporting .jpg, .jpeg &amp; .gif images</span>
                         </div>
@@ -118,13 +120,14 @@
                     <div style="text-align: right;margin-top:-15px;margin-right:-10px;">
                         <img src="styles/close.png" class="close1"></div>
                     
-                   
+                    <form>
                            Find Image(s):<input id="enter_url2" type="text" size="45" 
                                                 value="http://"/><br/>
                            <div style="text-align:center;"> and press 
-                                <button class="ctrlBtn" id="grab2" name="grab">Load</button>
+                                <button class="ctrlBtn" id="grab2">Load</button>
                            </div>
-                           
+                    </form>
+                    
                           <div style="text-align:left;padding-top:12px">
                           <span style="font-size:11px;">Currently supporting .jpg, .jpeg &amp; .gif images</span>
                         </div>   
@@ -210,13 +213,13 @@
  <!-- ############***********************MIX __ AREA***************************** ###############-->
             <div id="mix-area">
                 <h1>Fashion Mix</h1>
-                <div class="img-div">
+                <div class="img-div" id="img-div1">
                      <img class="mix-image" id="mix-image1" 
                      src=""/>
                     
                 </div>
                 
-                <div class="img-div">
+                <div class="img-div" id="img-div2">
                 <img class="mix-image" id="mix-image2" 
                      src=""/>
                 </div>

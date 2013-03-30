@@ -18,10 +18,13 @@
 
 
 .close1, .crop-close1, .crop-close2 {
-    opacity:0.9;
+    opacity:0.85;
     position:relative;
     top:-17px;
     left: 20px;
+    top:-7px\9;
+    left: 10px\9;
+
 }
 
 .prev-close, .url-close {
@@ -89,7 +92,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
      position: absolute;
      left: 15px;
      width: 500px;
-     height: 100px;
+     height: 130px;
      padding: 20px 20px;
      display: none;
      z-index: 10;
@@ -272,6 +275,12 @@ div .acontrols {
 
  
 }
+
+#ajax-loader-url {
+    left: 267px;
+  top: 280px;
+}
+
 
 #grab, #grab2 {
     /*font-size: 20px;

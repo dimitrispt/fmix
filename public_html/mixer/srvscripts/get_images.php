@@ -3,7 +3,7 @@ require_once 'includes/initialize.php';
 
 //Check for domain-origin of request!!!!!!!!
 
-
+$time = time();
 session_start();
 
 
@@ -23,28 +23,33 @@ if ( $_GET['index'] !=1  &&  $_GET['index'] !=2 &&
        $_GET['index'] !="1" && $_GET['index'] !="2" ) {exit;}
 $index = $_GET['index'];
 
+
+$mask = $img_folder .  '/image' . $index . '*.jpg';
+@array_map( "unlink", glob($mask) );
+
 switch (pathinfo($url, PATHINFO_EXTENSION)) {
 
     case 'gif':
         $filename = $img_folder . '/image' . $index . '.' . pathinfo($url, PATHINFO_EXTENSION);
         img2file($url, $filename);
-        gif2jpeg($filename, $img_folder . '/image' . $index . '.jpg');
-        $filename =  $img_folder .  '/image' . $index . '.jpg';
+        $new_filename =  $img_folder .  '/image' . $index ."_".$time. '.jpg';
+        gif2jpeg($filename, $new_filename);
         
-        $cropd_filename =  $img_folder .  '/cropd_image' . $index . '.jpg'; 
-        copy($filename, $cropd_filename);
+        
+        $cropd_filename =  $img_folder .  '/cropd_image' . $index. '.jpg'; 
+        copy($new_filename, $cropd_filename);
         
         header('Content-Type: application/json');
-        echo jresponse($filename);
+        echo jresponse($new_filename);
         exit;
         break;
     
     case 'jpg':
     case 'jpeg':
-        $filename = $img_folder . '/image' . $index . '.' . pathinfo($url, PATHINFO_EXTENSION);
+        $filename = $img_folder . '/image' . $index ."_".$time. '.' . pathinfo($url, PATHINFO_EXTENSION);
         img2file($url, $filename);
         
-        $cropd_filename =  $img_folder .  '/cropd_image' . $index . '.jpg'; 
+        $cropd_filename =  $img_folder .  '/cropd_image'.$index.'.jpg'; 
         copy($filename, $cropd_filename);
         
         header('Content-Type: application/json');
@@ -70,24 +75,25 @@ switch (pathinfo($url, PATHINFO_EXTENSION)) {
 
         switch ($image_type) {  
                case IMAGETYPE_GIF:
-                    $filename = $img_folder . '/image' . $index . '.gif';
+                    
+                    $filename = $img_folder . '/image' . $index ."_".$time.  '.gif';
                     img2file($url, $filename);
-                    gif2jpeg($filename, $img_folder . '/image' . $index . '.jpg');
-                    $filename =  $img_folder .  '/image' . $index . '.jpg';
-        
-                    $cropd_filename =  $img_folder .  '/cropd_image' . $index . '.jpg'; 
-                    copy($filename, $cropd_filename);
-        
+                    $new_filename =  $img_folder .  '/image' . $index ."_".$time. '.jpg';
+                    gif2jpeg($filename, $new_filename);
+
+                    $cropd_filename =  $img_folder .  '/cropd_image' . $index . ".jpg" ; 
+                    copy($new_filename, $cropd_filename);
+
                     header('Content-Type: application/json');
-                    echo jresponse($filename);
+                    echo jresponse($new_filename);
                     exit;
                     break;
                
                case IMAGETYPE_JPEG:
-                    $filename = $img_folder . '/image' . $index . '.jpg';
+                    $filename = $img_folder . '/image' . $index ."_".$time. '.jpg';
                     img2file($url, $filename);
         
-                    $cropd_filename =  $img_folder .  '/cropd_image' . $index . '.jpg'; 
+                    $cropd_filename =  $img_folder .  '/cropd_image'.$index . '.jpg';
                     copy($filename, $cropd_filename);
         
                     header('Content-Type: application/json');

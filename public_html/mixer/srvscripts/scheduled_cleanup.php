@@ -28,7 +28,7 @@ while ($name = readdir($dh)) {
     
     if (is_dir($name)) {
     
-        $age = time() - filectime($name);
+        $age = time() - filemtime($name);
     
         //79200 = 23 hours
         if (   ($age>79200)  &&  ($name !=".") && ($name !="..")     ){

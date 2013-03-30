@@ -45,7 +45,7 @@ $.ajaxSetup({ cache: false });
      
     $(".image_url"+index).click(function() {
         $("#ajax-loader-url").show();
-        $(this).css("opacity","0.6");
+        $("#images_url").css("opacity","0.6");
         imgindex = $(".image_url"+index).index(this);
        // index = 1;
         $.ajax({
@@ -69,7 +69,7 @@ $.ajaxSetup({ cache: false });
                            
                       $("#mix-image"+index).parent().waitForImages(function() {
                             $("#ajax-loader-url").hide();
-                            $(this).css("opacity","1");
+                            $("#images_url").css("opacity","1");
                             $(".pops").hide();
                             $("#images_url").animate({width: '0px'},200).hide();
                             $("#mix-area").show(10).animate({width: '550px'},200);
@@ -177,6 +177,8 @@ $(document).ready(function(){
   
    $(".mix-image").resizable();
    $(".img-div").draggable({stack: ".img-div"});
+   
+   $(".img-div").css("top","100px").css("left","100px");
   
       
     $("#pressme").click(function(){
@@ -316,7 +318,7 @@ $(".btnCrop").click(function(){
     $.ajax({
             url: "srvscripts/crop.php",
             
-            data: {xi1:x1, yi1: y1, wi1:w1, hi1:h1, index: 1},
+            data: {xi1:x1, yi1: y1, wi1:w1, hi1:h1, image: image1, index:1},
             dataType: "text"
           }).done (function(data) {
                   
@@ -335,7 +337,7 @@ $(".btnCrop2").click(function(){
     $(".btnCrop2").text("please wait..");
     $.ajax({
              url: "srvscripts/crop.php",
-            data: {xi1:x1, yi1: y1, wi1:w1, hi1:h1, index: 2},
+            data: {xi1:x1, yi1: y1, wi1:w1, hi1:h1, image: image2, index:2},
             dataType: "text"
           }).done (function(data) {
                       $('#mix-image2').attr('src', images_folder+data+"?t="+d.getTime());
@@ -348,7 +350,8 @@ $(".btnCrop2").click(function(){
   }
 );
  
- $("#grab").click(function() {
+ $("#grab").click(function(event) {
+     event.preventDefault();
      var img_url = $("#enter_url").attr('value');
      $("#grab").text(" please wait...");
      $("#ajax-loader").show();
@@ -456,6 +459,10 @@ $.ajax({
 
 $("#save").click(function(){
     $("#save").text("please wait..");
+    $(".pops").hide();
+    $("#mix-area").show();
+    $(".pops").hide();
+    //$("#save").attr("disabled","disabled");
    
     width1 = $("#mix-image1").css("width");
     height1 = $("#mix-image1").css("height");
@@ -502,6 +509,7 @@ $("#save").click(function(){
    $(".prev-close").click(function() {
             $(this).parent().parent().animate({width: '0px'},200).hide(10);
             $("#mix-area").show(10).animate({width: '550px'},300);
+    
        
     });
 
