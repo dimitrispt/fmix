@@ -15,6 +15,7 @@
     </head>
     
     <body>
+        
         <div id="instructLoad">
             <div id="instructBtnLoad1"></div>
             
@@ -45,9 +46,13 @@
                 
                 <div class="controls" id="img1-ctrl">
                     <div style="float:left;">
-                    <b>Image 1 Controls</b><br/>
+                    <b>Image 1</b><br/>
                     <button class="ctrlBtn" id="pressme">Load</button><br/>
+                    
                     <button class="ctrlBtn" id="cropme1" disabled>Crop</button><br/>
+                    Rotate:<br/>
+                    <div class="rotate-slider" id="rotate-slider1"></div>
+                    
                     </div>
                     <br/>
                     
@@ -67,11 +72,13 @@
                        
                     <form>
                         <label for="enter_url"> Find Image(s):
-                        <input id="enter_url" type="text" size="50"
+                        <input id="enter_url" type="text" size="50" style="margin-bottom:10px;"
                                value="http://" /></label><br/>
+                            
                         <div style="text-align:center;margin-top:5px;"> and press 
                             <button class="ctrlBtn" id="grab">Load</button>
                         </div>
+                                 
                     </form>
                     
                         <div style="text-align:left; padding-top:12px;">
@@ -104,9 +111,11 @@
                 
                     <!-- ************IMAGE 2 CONTROLS****************-->
              <div class="controls" id="img2-ctrl">
-                 <div style="float:left;"> <b>Image 2 Controls</b><br/>
+                 <div style="float:left;"> <b>Image 2</b><br/>
                 <button class="ctrlBtn" id="pressme2">Load</button><br/>
                 <button class="ctrlBtn" id="cropme2" disabled>Crop</button><br/>
+                 Rotate:<br/>
+                <div class="rotate-slider" id="rotate-slider2"></div>
              </div> 
                  <br/>
                 <div style="padding-left: 0px;padding-right: 15px;">
@@ -121,11 +130,13 @@
                         <img src="styles/close.png" class="close1"></div>
                     
                     <form>
-                           Find Image(s):<input id="enter_url2" type="text" size="45" 
+                           Find Image(s):<input id="enter_url2" type="text" size="45" style="margin-bottom:10px;"
                                                 value="http://"/><br/>
+                          
                            <div style="text-align:center;"> and press 
                                 <button class="ctrlBtn" id="grab2">Load</button>
                            </div>
+                          
                     </form>
                     
                           <div style="text-align:left;padding-top:12px">
@@ -212,6 +223,7 @@
             
  <!-- ############***********************MIX __ AREA***************************** ###############-->
             <div id="mix-area">
+                <div id="pleasewait"><h3>please wait...</h3></div>
                 <h1>Fashion Mix</h1>
                 <div class="img-div" id="img-div1">
                      <img class="mix-image" id="mix-image1" 

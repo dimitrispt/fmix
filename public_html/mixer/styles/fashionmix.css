@@ -1,3 +1,19 @@
+#pleasewait {
+    display:none;
+    top: 10px;
+    left: 150px;
+    color: black;
+    background-color: rgba(200,200,200,0.8);
+      background: transparent;
+      -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCC8C8C8,endColorstr=#CCC8C8C8)"; /* IE8 */
+      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#CCC8C8C8,endColorstr=#CCC8C8C8);   /* IE6 & 7 */
+      zoom: 1;
+    
+    position:absolute;
+    z-index: 200;
+    border-radius:10px;
+    padding: 10px;
+}
 .app-area {
     position: relative;
     height: 700px;
@@ -63,10 +79,12 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a5a5a5', end
 #img1-ctrl {
     border-top-left-radius: 15px;
     border-bottom: rgba(210,210,210,.5) solid 1px;
+    height: 300px;
     
 }
 #img2-ctrl {
     border-bottom-left-radius: 15px;
+    height: 371px;
 }
 
 #pressme,#pressme2 {
@@ -91,14 +109,15 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
      
      position: absolute;
      left: 15px;
-     width: 500px;
-     height: 130px;
+     width: 480px;
+     height: 140px;
      padding: 20px 20px;
      display: none;
      z-index: 10;
      border: 2px solid;
      border-radius: 10px;
      box-shadow: 3px 3px 5px #666;
+     text-align: left;
      
  }
 
@@ -123,7 +142,38 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
     margin: auto auto 10px 5px;
 }
 
+#dropbox, #dropbox2 {
+    border: solid 1px gray;
+    border-radius:20px;
+    width: 110px;
+    height: 70px; 
+    text-align: center;
+    /*background-color: rgb(200,200,200);*/
+    background: #fff url(image-file.png) no-repeat center;
+    padding:4px;
+    box-shadow: #666 1px 1px 2px 1px;
+    color: black;
+    text-shadow: #888 1px 0px 4px;
+    margin: 5px auto 10px;
+    
+}
 
+
+#dropbox0{
+    border: solid 1px gray;
+    border-radius:20px;
+    width: 50px;
+    height: 70px; 
+    text-align: center;
+    /*background-color: rgb(200,200,200);*/
+    background: #fff url(image-file.png) no-repeat center;
+    padding:4px;
+    box-shadow: #666 1px 1px 2px 1px;
+    color: black;
+    text-shadow: #888 1px 0px 4px;
+    margin: 5px auto 10px;
+    
+}
 
 .img-cropper {
     background: -moz-linear-gradient(left,  rgba(255,255,255,1) 0%, rgba(183,183,183,0.89) 100%); /* FF3.6+ */
@@ -362,7 +412,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#aaaaaa', end
     opacity: 0.7;
 }
 
-.image_url1:hover, .image2_url:hover {
+.image_url1:hover, .image_url2:hover {
    opacity: 1;
 }
 
